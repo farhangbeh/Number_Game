@@ -17,9 +17,17 @@ correctness_list = []
 inplace_list = []
 
 def print_history():
+    print("|   Guesses    |   Correct   |   In Position   |")
     for i in range(len(guess_list)):
-        print("|   Guesses    |   Correct   |   In Position   |")
         print("|     " + str(guess_list[i]) + "     |      " + str(correctness_list[i]) + "      |        " + str(inplace_list[i]) + "        |")
+
+def print_possibilites():
+    print(cutlist)
+
+
+#idea: make an array of 10 digits, when one is no longer a possibility, remove it from the list. and then remove the possibilites from cutlist
+
+
 
 
 def remove_non_possible(num, cor, inplc,cutlist):#idk why we have to call cutlist yet
@@ -39,9 +47,11 @@ def remove_non_possible(num, cor, inplc,cutlist):#idk why we have to call cutlis
             if (number[0] not in str(cutlist[i]) and number[1] not in str(cutlist[i])) or (number[0] not in str(cutlist[i]) and number[2] not in str(cutlist[i])) or (number[0] not in str(cutlist[i]) and number[3] not in str(cutlist[i])) or (number[1] not in str(cutlist[i]) and number[2] not in str(cutlist[i])) or (number[1] not in str(cutlist[i]) and number[3] not in str(cutlist[i])) or (number[2] not in str(cutlist[i]) and number[3] not in str(cutlist[i])):
                 temp_cutlist.remove(cutlist[i])
 
-    # if correct == 2:
-
-    if correct == 1: #check correct 
+    if correct == 2:
+        for i in range(len(cutlist)):
+            if (number[0] in str(cutlist[i]) and number[1] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[1] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[2] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[2] in str(cutlist[i]) and number[3] in str(cutlist[i])):
+                temp_cutlist.remove(cutlist[i])
+    if correct == 1: #check correct
         for i in range(len(cutlist)):
             if (number[0] in str(cutlist[i]) and number[1] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[2] in str(cutlist[i]) and number[3] in str(cutlist[i])):
                 temp_cutlist.remove(cutlist[i])
@@ -51,7 +61,7 @@ def remove_non_possible(num, cor, inplc,cutlist):#idk why we have to call cutlis
             if number[0]  in str(cutlist[i]) or number[1] in str(cutlist[i]) or number[2] in  str(cutlist[i]) or number[3] in str(cutlist[i]):
                 temp_cutlist.remove(cutlist[i])
     cutlist[:] = temp_cutlist[:]
-    print(cutlist)
+    # print(cutlist)
     print("remaining possibilities: " + str(len(cutlist)))
 
 
@@ -76,7 +86,7 @@ def Correctness(inp_num):
     inplace_list.append(in_place)
     print("Correct Numbers: " + str(correct) + "\nIn Place: " +str(in_place))
 # print (len(possibilities))
-print("the number is: " + str(number))
+# print("the number is: " + str(number))
 print("Welcome to the Number game! To start --- \n ")
 guess = 0
 
@@ -87,3 +97,5 @@ while guess != "q" and int(guess) != number:
     Correctness(guess)
     print_history()
     remove_non_possible(guess,correct,in_place,cutlist)
+
+print("Congratulations! You got it :)")
