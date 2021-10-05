@@ -36,41 +36,72 @@ def remove_non_possible(num, cor, inplc,cutlist):#idk why we have to call cutlis
     #whenever you call an array in a function, it assigns a new place and original is UNTOUCHED unless you call cutlist[:] or something.
     temp_cutlist = cutlist[:] #otherwise making identical list and modifying one modifies the other
     number = str(num)
-    if cor == 4:
-        for i in range(len(cutlist)):
-            if number[0] not in str(cutlist[i]) or number[1] not in str(cutlist[i]) or number[2] not in  str(cutlist[i]) or number[3] not in str(cutlist[i]):
-                temp_cutlist.remove(cutlist[i])
-        if inplc == 0:
-            for i in range(len(cutlist)):
-                if number[0] == str(cutlist[i])[0] or number[1] == str(cutlist[i])[1] or number[2] == str(cutlist[i])[2] or number[3] == str(cutlist[i])[3]:
-                    temp_cutlist.remove(cutlist[i])
-    if correct == 3: #check correct ALSO ^ is exclisve or
+    if cor == 4:#need to finish
+            if inplc == 0:
+                for i in range(len(cutlist)):
+                    if number[0] not in str(cutlist[i]) or number[1] not in str(cutlist[i]) or number[2] not in  str(cutlist[i]) or number[3] not in str(cutlist[i]):
+                        temp_cutlist.remove(cutlist[i])
+                    elif number[0] == str(cutlist[i])[0] or number[1] == str(cutlist[i])[1] or number[2] == str(cutlist[i])[2] or number[3] == str(cutlist[i])[3]:
+                        temp_cutlist.remove(cutlist[i])
+            if inplc == 1:
+                for i in range(len(cutlist)):
+                    if number[0] not in str(cutlist[i]) or number[1] not in str(cutlist[i]) or number[2] not in str(cutlist[i]) or number[3] not in str(cutlist[i]):
+                        temp_cutlist.remove(cutlist[i])
+                    elif (number[0] != str(cutlist[i])[0] and number[1] != str(cutlist[i])[1] and number[2] != str(cutlist[i])[2] and number[3] != str(cutlist[i])[3]):
+                        temp_cutlist.remove(cutlist[i])
+        # if inplc == 2:
+        #     for i in range(len(cutlist)):
+        #         if :
+        #             temp_cutlist.remove(cutlist[i])
+        # if inplc == 3:
+        #     for i in range(len(cutlist)):
+        #         if :
+        #             temp_cutlist.remove(cutlist[i])
+    if correct == 3: #need to finish #check correct ALSO ^ is exclisve or
         for i in range(len(cutlist)):
             if (number[0] not in str(cutlist[i]) and number[1] not in str(cutlist[i])) or (number[0] not in str(cutlist[i]) and number[2] not in str(cutlist[i])) or (number[0] not in str(cutlist[i]) and number[3] not in str(cutlist[i])) or (number[1] not in str(cutlist[i]) and number[2] not in str(cutlist[i])) or (number[1] not in str(cutlist[i]) and number[3] not in str(cutlist[i])) or (number[2] not in str(cutlist[i]) and number[3] not in str(cutlist[i])):
                 temp_cutlist.remove(cutlist[i])
             if inplc == 0:
                 if (number[0] == str(cutlist[i])[0] or number[1] == str(cutlist[i])[1] or number[2] == str(cutlist[i])[2] or number[3] == str(cutlist[i])[3]):
                     temp_cutlist.remove(cutlist[i])
-    if correct == 2:
+        # if inplc == 1:
+        #     for i in range(len(cutlist)):
+        #         if :
+        #             temp_cutlist.remove(cutlist[i])
+        # if inplc == 2:
+        #     for i in range(len(cutlist)):
+        #         if :
+        #             temp_cutlist.remove(cutlist[i])
+    if correct == 2: #need to finish
         for i in range(len(cutlist)):
+            if(number[0] not in str(cutlist[i]) and number[1] not in str(cutlist[i]) and number[2] not in str(cutlist[i]) and number[3] not in str(cutlist[i])):
+                temp_cutlist.remove(cutlist[i])
             if (number[0] in str(cutlist[i]) and number[1] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[1] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[2] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[2] in str(cutlist[i]) and number[3] in str(cutlist[i])):
                 temp_cutlist.remove(cutlist[i])
             if inplc == 0:
                 if (number[0] == str(cutlist[i])[0] or number[1] == str(cutlist[i])[1] or number[2] == str(cutlist[i])[2] or number[3] == str(cutlist[i])[3]):
                     temp_cutlist.remove(cutlist[i])
+        # if inplc == 1:
+        #     for i in range(len(cutlist)):
+        #         if :
+        #             temp_cutlist.remove(cutlist[i])
+        #
     if correct == 1: #check correct
-        if inplc == 0: #should output 1440 possibilites, NOT 1560
+        if inplc == 0: #should output 1260
             for i in range(len(cutlist)):
                 if (number[0] in str(cutlist[i]) and number[1] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[2] in str(cutlist[i]) and number[3] in str(cutlist[i])):
                     temp_cutlist.remove(cutlist[i])
                 elif (number[0] == str(cutlist[i])[0] or number[1] == str(cutlist[i])[1] or number[2] == str(cutlist[i])[2] or number[3] == str(cutlist[i])[3]):
                     temp_cutlist.remove(cutlist[i])
-
+                elif(number[0] not in str(cutlist[i]) and number[1] not in str(cutlist[i]) and number[2] not in str(cutlist[i]) and number[3] not in str(cutlist[i])):
+                    temp_cutlist.remove(cutlist[i])
         if inplc == 1:
             for i in range(len(cutlist)):
                 if (number[0] in str(cutlist[i]) and number[1] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[0] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[2] in str(cutlist[i])) or (number[1] in str(cutlist[i]) and number[3] in str(cutlist[i])) or (number[2] in str(cutlist[i]) and number[3] in str(cutlist[i])):
                     temp_cutlist.remove(cutlist[i])
                 elif (number[0] != str(cutlist[i])[0] and number[1] != str(cutlist[i])[1] and number[2] != str(cutlist[i])[2] and number[3] != str(cutlist[i])[3]):
+                    temp_cutlist.remove(cutlist[i])
+                elif(number[0] not in str(cutlist[i]) and number[1] not in str(cutlist[i]) and number[2] not in str(cutlist[i]) and number[3] not in str(cutlist[i])):
                     temp_cutlist.remove(cutlist[i])
     if correct == 0:
         for i in range(len(cutlist)):
@@ -82,7 +113,8 @@ def remove_non_possible(num, cor, inplc,cutlist):#idk why we have to call cutlis
 
 
 # number = random.choice(possibilities)
-number = 2567
+# number = 2567
+number=3865
 def Correctness(inp_num):
     if inp_num == "q":
         return 0
