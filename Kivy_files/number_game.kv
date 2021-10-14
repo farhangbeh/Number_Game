@@ -1,0 +1,35 @@
+#:kivy 1.0.9
+
+# <Num_Buttons>:
+#     size: 50, 50
+#     canvas:
+#         Ellipse:
+#             pos: self.pos
+#             size: self.size
+
+
+<NumberGame>:
+    canvas:
+        Rectangle:
+            pos: self.center_x - 200, 0
+            size: 10, self.height
+    TextInput:
+        id: text_input
+        size_hint_x: 20
+        center_x: root.width / 2
+        top: root.top-250
+    Label:
+        font_size: 40
+        center_x: root.width / 2
+        top: root.top - 50
+        text: "Cows and Bulls"
+    Label:
+        id: answer
+        text: "answer"
+    Button:
+        center_x: root.width / 2
+        top: root.top-300
+        id: enter_button
+        text: 'enter'
+        on_press: root.register_answer()
+        on_press: answer.text = str(root.register_answer())
