@@ -3,6 +3,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import (
     NumericProperty, ReferenceListProperty, ObjectProperty
 )
+from kivy.core.audio import SoundLoader
 from kivy.vector import Vector
 from kivy.clock import Clock
 from random import randint
@@ -13,6 +14,7 @@ import random
 
 
 class NumberGame(Widget):
+
 
     def remove_non_possible(num, cor, inplc,cutlist):#idk why we have to call cutlist yet
         #whenever you call an array in a function, it assigns a new place and original is UNTOUCHED unless you call cutlist[:] or something.
@@ -118,7 +120,55 @@ class NumberGame(Widget):
     def register_answer(self):
         print("your guess is: ", self.ids.text_input.text)
         self.Correctness(self.ids.text_input.text)
-        return("Cows: " + str(correct) + " \nBulls: " + str(in_place))
+        global guess_list
+        global inplace_list
+        global correctness_list
+        guess_list.append(self.ids.text_input.text)
+        inplace_list.append(in_place)
+        correctness_list.append(correct)
+        return(" " + self.ids.text_input.text + "       " + str(correct) + "        " + str(in_place))
+
+
+
+
+
+    def status_label(self):
+        self.Correctness(self.ids.text_input.text)
+        if in_place == 4:
+            self.moogratulations()
+            return("Congratulations!\nYou got it!\nPlay Again?")
+        else:
+            return("Try Again")
+
+    def reset_button(self):
+        global possibilities
+        for a in range (1,10):
+            for b in range (0,10):
+                for c in range (0,10):
+                    for d in range (0,10):
+                        if a != b and a!=c and a!=d and b != c and b!=d and c != d:
+                            if int(str(a) + str(b) + str(c) + str(d)) not in possibilities:
+                                possibilities.append(int(str(a) + str(b) + str(c) + str(d)))
+        global number
+        global guess_list
+        global correctness_list
+        global inplace_list
+        global cutlist
+        cutlist = possibilities[:]
+        guess_list = []
+        correctness_list = []
+        inplace_list = []
+        number=int(random.choice(possibilities))
+        print(number)
+        return 0
+
+
+
+
+
+    def moogratulations(self):
+        sound = SoundLoader.load('moo.mp3')
+        sound.play()
     pass
 
 
@@ -140,11 +190,16 @@ if __name__ == '__main__':
                     if a != b and a!=c and a!=d and b != c and b!=d and c != d:
                         if int(str(a) + str(b) + str(c) + str(d)) not in possibilities:
                             possibilities.append(int(str(a) + str(b) + str(c) + str(d)))
+    global guess_list
+    global correctness_list
+    global inplace_list
+    global number
     cutlist = possibilities[:]
     guess_list = []
     correctness_list = []
     inplace_list = []
-    number=3865
+    number=int(random.choice(possibilities))
+    print("number = " +str(number))
     Number_gameApp().run()
 
 

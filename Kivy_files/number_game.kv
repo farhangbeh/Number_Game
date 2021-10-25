@@ -1,35 +1,78 @@
 #:kivy 1.0.9
 
-# <Num_Buttons>:
-#     size: 50, 50
-#     canvas:
-#         Ellipse:
-#             pos: self.pos
-#             size: self.size
-
-
 <NumberGame>:
     canvas:
+        Color:
+            rgba: 0,0,0,1
         Rectangle:
-            pos: self.center_x - 200, 0
-            size: 10, self.height
+            pos: 0, 0
+            size: 150, self.height
+        Rectangle:
+            pos: 0, self.height-50
+            size: 300, 50
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'bulls.png'
     TextInput:
         id: text_input
         size_hint_x: 20
         center_x: root.width / 2
         top: root.top-250
+        on_text: if len(self.text) >= 5: self.text = self.text[0:4]
+
     Label:
         font_size: 40
         center_x: root.width / 2
         top: root.top - 50
         text: "Cows and Bulls"
     Label:
+        id: high_score
+        text: "High Score - Fastest - Fewest Guesses:"
+        size: self.texture_size
+        size_hint: 1, None
+        top: root.top - 10
+        height: self.texture_size[1]
+    Label:
+        id: fastest_time
+        text: ""
+        size: self.texture_size
+        size_hint: 1, None
+        top: root.top - 20
+        height: self.texture_size[1]
+    Label:
+        id: fastest_attempts
+        text: ""
+        size: self.texture_size
+        size_hint: 1, None
+        top: root.top - 30
+        height: self.texture_size[1]
+    Label:
         id: answer
-        text: "answer"
+        text: "Guess  Cows  Bulls"
+        size: self.texture_size
+        size_hint: 1, None
+        height: self.texture_size[1]
+    Label:
+        id: congratulations
+        text: "input a number\n   to start!"
+        center_x: root.width / 3
+        top: root.top-250
     Button:
         center_x: root.width / 2
         top: root.top-300
         id: enter_button
         text: 'enter'
         on_press: root.register_answer()
-        on_press: answer.text = str(root.register_answer())
+        on_press: answer.text += "\n" + str(root.register_answer())
+        on_press: congratulations.text = str(root.status_label())
+
+    Button:
+        id: reset
+        center_x: root.width-50
+        text: "Reset Game"
+        on_release: root.reset_button()
+        on_release: answer.text = "answer"
+        on_release: congratulations.text = "input a number\n   to start!"
